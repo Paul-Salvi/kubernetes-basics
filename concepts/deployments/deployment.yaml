@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecom-api-replicaset
+  labels:
+    app: catalog-api
+    tenant: tga
+spec:
+  selector:
+    matchLabels:
+      app: catalog-api
+  replicas: 3
+  template:
+    metadata:
+      name: ecom-api
+      labels:
+        app: catalog-api
+        tenant: tga
+    spec:
+      containers:
+        - name: product-catalog-api
+          image: nginx
+          env:
+            - name: ASP
